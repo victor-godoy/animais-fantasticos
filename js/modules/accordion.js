@@ -1,18 +1,30 @@
-export default function initAccordion() {
-  const accordionList = document.querySelectorAll('[data-anime="accordion"] dt');
-  const activeClass = 'ativo';
-
-  function activeAccordion() {
-    this.classList.toggle(activeClass);
-    this.nextElementSibling.classList.toggle(activeClass);
+export default class Accordion {
+  constructor(list) {
+    this.accordionList = document.querySelectorAll(list);
+    /* const accordionList = document.querySelectorAll(
+      '[data-anime="accordion"] dt'
+    );*/
+    this.activeClass = "ativo";
   }
 
-  if (accordionList.length) {
-    accordionList[0].classList.add(activeClass);
-    accordionList[0].nextElementSibling.classList.add(activeClass);
+  toggleAccordion(item) {
+    // estou passando esse parametro (item) pois quero que seja referencia ao meu item mesmo por isso nao usei o this
+    // item nesse caso é o meu ( dt ativo )
+    item.classList.toggle(this.activeClass);
+    item.nextElementSibling.classList.toggle(this.activeClass);
+  }
 
-    accordionList.forEach((item) => {
-      item.addEventListener('click', activeAccordion);
+  // adiciona os eventos ao accordion
+  addAccordionListener() {
+    this.accordionList.forEach((item) => {
+      item.addEventListener("click", () => this.toggleAccordion(item));
     });
+  }
+
+  init() {
+    if (this.accordionList.length) {
+      this.toggleAccordion(this.accordionList[0]); // para ativar o primeiro item do accordion
+      this.addAccordionListener();
+    }
   }
 }
