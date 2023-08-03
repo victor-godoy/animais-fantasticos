@@ -1,5 +1,4 @@
 import ScrollSuave from "./modules/scroll-suave.js";
-import ScrollAnima from "./modules/scroll-anima.js";
 import Accordion from "./modules/accordion.js";
 import TabNav from "./modules/tabnav.js";
 import Modal from "./modules/modal.js";
@@ -9,6 +8,7 @@ import initMenuMobile from "./modules/menu-mobile.js";
 import initFuncionamento from "./modules/funcionamento.js";
 import fetchAnimais from "./modules/fetch-animais.js";
 import fetchBitcoin from "./modules/fetch-bitcoin.js";
+import ScrollAnima from "./modules/scroll-anima.js";
 
 // scrollsuave
 const scrollSuave = new ScrollSuave('[data-menu="suave"] a[href^="#"]');

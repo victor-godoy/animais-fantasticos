@@ -1,11 +1,12 @@
+import debounce from "./debounce.js";
+
 export default class ScrollAnima {
   constructor(sections) {
     this.sections = document.querySelectorAll(sections);
     this.windowMetade = window.innerHeight * 0.6;
 
-    this.checkDistance = this.checkDistance.bind(this);
+    this.checkDistance = debounce(this.checkDistance.bind(this), 50);
   }
-
   // pegar a distancia de cada item em relacao ao topo do site
   getDistance() {
     // é interessante eu rodar essa funcao (getDistance) só uma vez
@@ -42,12 +43,18 @@ export default class ScrollAnima {
 
   init() {
     // se existi secoes para ser animadas eu ativo isso
+    // if (this.sections.length) {
+    //   this.checkDistance(); // ele já vai iniciar com a animacao
+
+    //   this.getDistance();
+    //   window.addEventListener("scroll", this.checkDistance);
+    //   // o this dentro do callback tem que fazer referencia ao window por isso o (bind)
+    // }
+
     if (this.sections.length) {
       this.getDistance();
-      this.checkDistance(); // ele já vai iniciar com a animacao
-
+      this.checkDistance();
       window.addEventListener("scroll", this.checkDistance);
-      // o this dentro do callback tem que fazer referencia ao window por isso o (bind)
     }
     return this;
   }
